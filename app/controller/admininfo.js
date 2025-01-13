@@ -7,8 +7,8 @@ class AdmininfoController extends Controller {
   async adminRegister() {
     const { ctx } = this
     const { phone, password } = ctx.request.body
-    console.log(phone, password);
-    
+    console.log(phone, password)
+    ctx.validate({phone:{type: "adminPhone",tips: '手机号码格式不正确'}}, ctx.request.body)
   }
 }
 
