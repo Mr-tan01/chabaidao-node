@@ -16,5 +16,10 @@ module.exports = {
   onerror : {
     enable: true,
     package: 'egg-onerror'
+  },
+  // 定义一个名为cors的配置对象
+  cors : {
+    enable: true,
+    package: 'egg-cors',
   }
 };

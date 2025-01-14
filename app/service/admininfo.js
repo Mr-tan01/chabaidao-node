@@ -33,6 +33,40 @@ class AdmininfoService extends Service {
       }
     }
   }
+
+  // 登录商家账号数据库操作
+  async adminLogin(account, password) {
+      // 创建哈希对象
+    const hash = crypto.createHash('sha256').update(password)
+    // 生成哈希值
+    const passwordHash = hash.digest('hex')
+    const db = this.ctx.model.Admininfo
+    // 查询数据库该账号的相关信息赋值给res
+    const res = await db.find({account, password: passwordHash},
+      // 第二个参数指定不返回的字段
+      {account:false, location:false}
+    ).lean()  //将mongoose的文档对象转换为普通的JavaScript对象,不然会携带多余其他自带信息
+    // 判断是否存在该账号
+    if (res.length > 0) {
+      // 调用生成token的方法
+      const token = { admin_Token: this.ctx.generateToken(res[0].adminUid)}
+      console.log(token);
+      return {
+        // 数组合并
+        data: {...res[0], ...token},
+        code: 200,
+        msg: '登录成功'
+      }
+    }else {
+      // 如果不存在,则返回错误信息
+      return {
+        data: [],
+        code: 422,
+        msg: '账号或密码错误'
+      }
+    }
+    
+  }
 }
 
 module.exports = AdmininfoService;

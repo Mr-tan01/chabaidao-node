@@ -7,7 +7,7 @@ class AdmininfoController extends Controller {
   async adminRegister() {
     const { ctx, service } = this
     const { phone, password } = ctx.request.body
-    console.log(phone, password)
+    // console.log(phone, password)
     // 注册校验
     ctx.validate({
       phone:{type: "adminPhone",tips: '手机号码格式不正确'},
@@ -18,6 +18,21 @@ class AdmininfoController extends Controller {
     // 返回结果给前端
     // ctx.body = res
     ctx.send([], res.code, res.msg)
+  }
+  // 登录商家接口
+  async adminLogin() {
+    const { ctx, service } = this
+    const { phone, password } = ctx.request.body
+    // console.log(phone, password)
+    // 登录校验
+    ctx.validate({
+      phone:{type: "adminPhone",tips: '手机号码格式不正确'},
+      password:{type: "adminPassword",tips: '密码格式不正确,6-10位数字字母组合'},
+    }, ctx.request.body)
+    // 调用service层进行数据库操作
+    const { data, code, msg } = await service.admininfo.adminLogin(phone, password)
+    // 将操作结果返回结果给前端
+    ctx.send( data, code, msg )
   }
 }
 

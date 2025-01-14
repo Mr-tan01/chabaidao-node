@@ -5,4 +5,6 @@ module.exports = app => {
   const { router, controller } = app;
   // 商家注册
   router.post('/api/admin/register', controller.admininfo.adminRegister);
+  // 商家登录
+  router.post('/api/admin/login', controller.admininfo.adminLogin);
 };

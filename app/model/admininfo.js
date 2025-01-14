@@ -47,12 +47,12 @@ module.exports = app =>{
       default:''
     },
     // 起送价
-    shopIntroduction:{
+    initialPrice:{
       type:Number,
       default:0
     },
     // 营业时间
-    shopIntroduction:{
+    businessHours:{
       type:[String],
       default:[]
     },

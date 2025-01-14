@@ -72,7 +72,20 @@ module.exports = appInfo => {
       }
     }
   }
-
+  // 配置jwt
+  config.jwt = {
+    // 密钥
+    secret: 'chabaidao',
+    // 过期时间3天 (单位：秒)
+    expiresIn: 60 * 60 * 24 * 3
+  }
+  // 跨域
+  config.cors = {
+    // 允许的源
+    origin: '*',
+    // 允许的请求方法
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH'
+  }
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',
