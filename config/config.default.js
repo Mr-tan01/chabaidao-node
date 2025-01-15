@@ -86,6 +86,24 @@ module.exports = appInfo => {
     // 允许的请求方法
     allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH'
   }
+  //文件上传
+  config.multipart = {
+    // 模式为文件形式
+    mode: 'file',
+    // 设置文件大小限制为1MB
+    fileSize: '1mb',
+  }
+  // 阿里云对象存储oss
+  config.oss = {
+    accessKeyId:'LTAI5t6eYAYyaKjxjsCS6izw',
+    accessKeySecret:'hEjmzGpMr4ATHWeIWrga93oFzD3HTY',
+    // 存储桶名称
+    bucket:'personal-project',
+    // 存储桶区域
+    region:'oss-cn-shenzhen',
+    // 文件夹名称
+    folder:'chabaidao/'
+  }
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',

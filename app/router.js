@@ -7,4 +7,6 @@ module.exports = app => {
   router.post('/api/admin/register', controller.admininfo.adminRegister);
   // 商家登录
   router.post('/api/admin/login', controller.admininfo.adminLogin);
+  //文件上传
+  router.post('/api/admin/uploadFile', controller.upload.uploadFile);
 };
