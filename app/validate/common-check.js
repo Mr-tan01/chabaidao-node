@@ -19,4 +19,16 @@ module.exports = app => {
       return rule.tips
     }
   })
+  // 验证数组
+  validator.addRule('nullArray', (rule,value) => {
+    if(!Array.isArray(value)){
+      return '该字段必须是数组类型'
+    }
+    if(value.length <= 0){
+      return rule.tips
+    }
+    if(value[0] === '' || value[1] === ''){
+      return rule.tips
+    }
+  })
 }

@@ -31,7 +31,7 @@ module.exports = app =>{
       default:''
     },
     // 商家经纬度地址
-    address:{
+    location:{
       type:[Number], // 数组数字类型
       default:[]
     },

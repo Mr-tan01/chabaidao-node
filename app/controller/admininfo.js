@@ -34,7 +34,7 @@ class AdmininfoController extends Controller {
     // 将操作结果返回结果给前端
     ctx.send( data, code, msg )
   }
-  // 跟新logo接口
+  // 更新logo接口
   async updateLogo() {
     const { ctx, service } = this
     const { value } = ctx.request.body
@@ -44,6 +44,60 @@ class AdmininfoController extends Controller {
     }, ctx.request.body)
     // 进行数据库操作存入logo（参数一：更新的值，参数二：查询的值）, 在中间件中ctx的auth属性存储了认证信息
     await ctx.model.Admininfo.findOneAndUpdate({ adminUid: ctx.auth.uid }, { logo: value })
+    ctx.send()
+  }
+  // 更新店铺名称接口
+  async updateTradeName() {
+    const { ctx, service } = this
+    const { value } = ctx.request.body
+    ctx.validate({
+      value:{type: "nullValue",tips: '请输入店铺名称'},
+    }, ctx.request.body)
+    await ctx.model.Admininfo.findOneAndUpdate({ adminUid: ctx.auth.uid }, { tradeName: value })
+    ctx.send()
+  }
+  // 更新店铺介绍接口
+  async updateShopIntroduction() {
+    const { ctx, service } = this
+    const { value } = ctx.request.body
+    ctx.validate({
+      value:{type: "nullValue",tips: '请输入店铺介绍'},
+    }, ctx.request.body)
+    await ctx.model.Admininfo.findOneAndUpdate({ adminUid: ctx.auth.uid }, { shopIntroduction: value })
+    ctx.send()
+  }
+  // 更新店铺营业时间接口
+  async updateBusinessHours() {
+    const { ctx, service } = this
+    const { time } = ctx.request.body
+    console.log(time); //[ '08:30', '18:30' ]
+    ctx.validate({
+      time:{type: "nullArray",tips: '请设置营业时间'},
+    }, ctx.request.body)
+    await ctx.model.Admininfo.findOneAndUpdate({ adminUid: ctx.auth.uid }, 
+      { $set: { businessHours: time } }) // $set  修改数组
+    ctx.send()
+  }
+  // 更新起送价接口
+  async updateInitialPrice() {
+    const { ctx, service } = this
+    const { value } = ctx.request.body
+    ctx.validate({
+      value:{type: "nullValue",tips: '请设置起送价'},
+    }, ctx.request.body)
+    await ctx.model.Admininfo.findOneAndUpdate({ adminUid: ctx.auth.uid }, { initialPrice: value })
+    ctx.send()
+  }
+  // 更新店铺地址接口
+  async updateAddress() {
+    const { ctx, service } = this
+    const { address, location } = ctx.request.body
+    ctx.validate({
+      address:{type: "nullValue",tips: '请设置店铺地址'},
+      location:{type: "nullArray",tips: '请设置店铺地址'}
+    }, ctx.request.body)
+    await ctx.model.Admininfo.findOneAndUpdate({ adminUid: ctx.auth.uid }, 
+      { address: address, $set: { location: location } })
     ctx.send()
   }
 }

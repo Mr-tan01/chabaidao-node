@@ -11,4 +11,14 @@ module.exports = app => {
   router.post('/api/admin/uploadFile', controller.upload.uploadFile);
   // 更新logo
   router.post('/api/admin/upload-logo', app.middleware.jwt(), controller.admininfo.updateLogo);
+  // 更新店铺名称
+  router.post('/api/admin/upload-tradeName', app.middleware.jwt(), controller.admininfo.updateTradeName);
+  // 更新店铺介绍
+  router.post('/api/admin/upload-shopintroduction', app.middleware.jwt(), controller.admininfo.updateShopIntroduction);
+  // 更新店铺营业时间
+  router.post('/api/admin/upload-businesshours', app.middleware.jwt(), controller.admininfo.updateBusinessHours);
+  // 更新起送价
+  router.post('/api/admin/upload-initialprice', app.middleware.jwt(), controller.admininfo.updateInitialPrice);
+  // 更新店铺地址
+  router.post('/api/admin/upload-address', app.middleware.jwt(), controller.admininfo.updateAddress);
 };
