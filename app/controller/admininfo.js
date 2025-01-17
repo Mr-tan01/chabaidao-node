@@ -34,6 +34,18 @@ class AdmininfoController extends Controller {
     // 将操作结果返回结果给前端
     ctx.send( data, code, msg )
   }
+  // 跟新logo接口
+  async updateLogo() {
+    const { ctx, service } = this
+    const { value } = ctx.request.body
+    // logo校验
+    ctx.validate({
+      value:{type: "nullValue",tips: '请上传图片'},
+    }, ctx.request.body)
+    // 进行数据库操作存入logo（参数一：更新的值，参数二：查询的值）, 在中间件中ctx的auth属性存储了认证信息
+    await ctx.model.Admininfo.findOneAndUpdate({ adminUid: ctx.auth.uid }, { logo: value })
+    ctx.send()
+  }
 }
 
 module.exports = AdmininfoController;

@@ -13,4 +13,10 @@ module.exports = app => {
       return rule.tips
     }
   })
+  // 验证不能为空
+  validator.addRule('nullValue', (rule,value) => {
+    if(value.trim() === ''){
+      return rule.tips
+    }
+  })
 }

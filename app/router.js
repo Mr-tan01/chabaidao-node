@@ -9,4 +9,6 @@ module.exports = app => {
   router.post('/api/admin/login', controller.admininfo.adminLogin);
   //文件上传
   router.post('/api/admin/uploadFile', controller.upload.uploadFile);
+  // 更新logo
+  router.post('/api/admin/upload-logo', app.middleware.jwt(), controller.admininfo.updateLogo);
 };
