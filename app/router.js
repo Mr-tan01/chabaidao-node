@@ -21,4 +21,10 @@ module.exports = app => {
   router.post('/api/admin/upload-initialprice', app.middleware.jwt(), controller.admininfo.updateInitialPrice);
   // 更新店铺地址
   router.post('/api/admin/upload-address', app.middleware.jwt(), controller.admininfo.updateAddress);
+  // 新增商品类目
+  router.post('/api/admin/add-category', app.middleware.jwt(), controller.category.addCategory);
+  // 获取商品类目
+  router.get('/api/admin/get-category', app.middleware.jwt(), controller.category.getCategory);
+  // 删除商品类目
+  router.get('/api/admin/delete-category', app.middleware.jwt(), controller.category.deleteCategory);
 };
