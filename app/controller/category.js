@@ -44,6 +44,14 @@ class CategoryController extends Controller {
     await db.findByIdAndDelete({ _id: _id })
     ctx.send()
   }
+  // 获取所有分类类目接口
+  async getAllCategory() {
+    const { ctx } = this
+    const db = ctx.model.Category
+    // 获取所有分类类目但不返回icon
+    const res = await db.find({},{ icon: false })
+    ctx.send(res)
+  }
 }
 
 module.exports = CategoryController;

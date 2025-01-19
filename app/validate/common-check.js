@@ -31,4 +31,22 @@ module.exports = app => {
       return rule.tips
     }
   })
+  // 验证商品属性数组
+  validator.addRule('goodsStatsArray', (rule,value) => {
+    if(!Array.isArray(value)){
+      return '该字段必须是数组类型'
+    }
+  })
+  // 验证商品sku数组
+  validator.addRule('goodsSkuArray', (rule,value) => {
+    if(!Array.isArray(value)){
+      return '该字段必须是数组类型'
+    }else{
+      for( const item of value ){
+        if( item.price === '' || item.stock === '' ){
+          return rule.tips
+        }
+      }
+    }
+  })
 }
