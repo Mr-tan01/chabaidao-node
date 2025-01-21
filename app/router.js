@@ -41,4 +41,8 @@ module.exports = app => {
   router.get('/api/admin/get-recommend', app.middleware.jwt(), controller.recommendGoods.getRecommend);
   // 删除推荐商品
   router.get('/api/admin/delete-recommend', app.middleware.jwt(), controller.recommendGoods.deleteRecommend);
+
+  // -----------------小程序端接口------------------
+  // 获取轮播图
+  router.get('/api/wx/get-swiper', controller.wxHomepage.getSwiper);
 };
