@@ -3,7 +3,7 @@
 const Controller = require('egg').Controller;
 
 class WxHomepageController extends Controller {
-  // 获取小程序轮播图接口
+  // 小程序获取轮播图接口
   async getSwiper() {
     const { ctx } = this
     const db = ctx.model.RecommendGoods

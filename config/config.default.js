@@ -104,6 +104,11 @@ module.exports = appInfo => {
     // 文件夹名称
     folder:'chabaidao/'
   }
+  // 腾讯地图key
+  config.wxkey = {
+    key: 'U3RBZ-XKFK3-OSU3P-O4KEI-PQP62-BUBBZ'
+  }
+
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',
