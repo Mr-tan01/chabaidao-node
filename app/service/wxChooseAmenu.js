@@ -36,7 +36,30 @@ class WxChooseAmenuService extends Service {
     }else{
       return { distance:[], status:500, msg:'获取失败', error:res.data.message }
     }
-  }   
+  }
+  // 获取所有分类和商品信息操作
+  async getAllGoods(){ 
+    const { ctx, app } = this
+    // 分类表关联了商品表
+    const db = ctx.model.Category
+    const res = await db.aggregate([
+      {
+        $lookup: {
+          from: 'Goods',
+          localField: '_id',
+          foreignField: 'category_id',
+          as:'category'
+        }
+      },
+      // 过滤没有被分类的商品
+      {
+        $match: {
+          'category': { $ne: [] }
+        }
+      }
+    ])
+    return res
+  }
 }
 
 module.exports = WxChooseAmenuService;
