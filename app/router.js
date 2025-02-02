@@ -55,4 +55,6 @@ module.exports = app => {
   router.get('/api/wx/goods-sku-list', controller.wxChooseAmenu.getGoodsSkuList);
   // 搜索商品
   router.get('/api/wx/search-goods', controller.wxChooseAmenu.searchGoods);
+  // 用户登录
+  router.get('/api/wx/wxlogin', controller.wxuserinfo.wxLogin);
 };

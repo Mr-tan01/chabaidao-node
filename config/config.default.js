@@ -108,6 +108,11 @@ module.exports = appInfo => {
   config.wxkey = {
     key: 'U3RBZ-XKFK3-OSU3P-O4KEI-PQP62-BUBBZ'
   }
+  // 小程序appid和密钥
+  config.wxapp = {
+    appid: 'wx577e561a12b841f6',
+    secret:'5f20164bd75221942684ea83821958a5'
+  }
 
   // add your user config here
   const userConfig = {
