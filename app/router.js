@@ -53,4 +53,6 @@ module.exports = app => {
   router.get('/api/wx/all-goods', controller.wxChooseAmenu.getAllGoods);
   // 获取单个商品sku
   router.get('/api/wx/goods-sku-list', controller.wxChooseAmenu.getGoodsSkuList);
+  // 搜索商品
+  router.get('/api/wx/search-goods', controller.wxChooseAmenu.searchGoods);
 };

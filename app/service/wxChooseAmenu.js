@@ -60,6 +60,17 @@ class WxChooseAmenuService extends Service {
     ])
     return res
   }
+  // 搜索商品
+  async searchGoods(keyword,page){
+    const { ctx } = this
+    const db = ctx.model.Goods
+    // 模糊查询
+    const query = { $regex: keyword, $options: 'i' } // i表示不区分大小写
+    const res = await db.find({ 
+      $or: [{ goods_name: query }, { goods_describe: query }] 
+    }).skip((page - 1) * 10).limit(10)
+    return res
+  }
 }
 
 module.exports = WxChooseAmenuService;

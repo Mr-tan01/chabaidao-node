@@ -37,7 +37,19 @@ class WxChooseAmenuController extends Controller {
       _id: { type: 'nullValue', tips:'商品id不能为空' },
     },ctx.query)
     const db = ctx.model.Skulist
-    const res = db.find({goods_id:_id})
+    const res = await db.find({goods_id:_id})
+    ctx.send(res)
+  }
+  // 搜索商品
+  async searchGoods(){
+    const {ctx,select}=this
+    const {keyword,page} = ctx.query
+    ctx.validate({
+      keyword: { type: 'nullValue', tips:'搜索关键字不能为空' },
+      page: { type: 'nullValue', tips:'页码不能为空' },
+    },ctx.query)
+    const res = await this.service.wxChooseAmenu.searchGoods(keyword,page)
+    ctx.send(res)
   }
 }
 
