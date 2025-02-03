@@ -57,4 +57,14 @@ module.exports = app => {
   router.get('/api/wx/search-goods', controller.wxChooseAmenu.searchGoods);
   // 用户登录
   router.get('/api/wx/wxlogin', controller.wxuserinfo.wxLogin);
+  // 用户信息修改
+  router.post('/api/wx/uploadWxUser',app.middleware.jwt(), controller.wxuserinfo.uploadWxUser);
+  // 用户新增地址
+  router.post('/api/wx/upload-address',app.middleware.jwt(), controller.wxuserinfo.uploadAddress);
+  // 用户设置默认地址
+  router.get('/api/wx/set-default-address',app.middleware.jwt(), controller.wxuserinfo.setDefaultAddress);
+  // 用户删除地址
+  router.get('/api/wx/delete-user-address',app.middleware.jwt(), controller.wxuserinfo.deleteUserAddress);
+  // 获取用户地址列表
+  router.get('/api/wx/get-user-address',app.middleware.jwt(), controller.wxuserinfo.getUserAddress);
 };
