@@ -73,4 +73,6 @@ module.exports = app => {
   router.post('/api/wx/selfpickup-order',app.middleware.jwt(), controller.userorder.selfpickupOrder);
   // 外卖订单支付
   router.post('/api/wx/outdoor-order',app.middleware.jwt(), controller.userorder.outdoorOrder);
+  // 获取我的订单列表
+  router.get('/api/wx/all-order-list',app.middleware.jwt(), controller.userorder.allOrderList);
 };

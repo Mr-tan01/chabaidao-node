@@ -1,7 +1,7 @@
 // 下单信息
 const moment = require('moment')
-const Decimal = require('decimal.js')
 moment.locale('zh-cn')
+const Decimal = require('decimal.js')
 module.exports = app => {
   const mongoose = app.mongoose
   mongoose.pluralize(null) // 去掉复数形式
@@ -25,9 +25,9 @@ module.exports = app => {
     default:()=> moment().utcOffset(8).format('YYYY-MM-DD HH:mm:ss')
     },
     // 下单时间戳
-    timestamp:{
-      type:Number,
-      default:()=> moment.unix()
+    timestamp: {
+      type: Number,
+      default: () => moment().unix()
     },
     // 取餐码
     takeMealCode:{
@@ -50,7 +50,7 @@ module.exports = app => {
           type:String,
           required:true
         },
-        mobule:{
+        mobile:{
           type:String,
           required:true
         },
@@ -67,7 +67,7 @@ module.exports = app => {
     // 到店取餐手机号
     userMobile:{
       type:String,
-      required:true
+      default:''
     },
     // 提交的商品订单
     productOrder:[
@@ -106,23 +106,20 @@ module.exports = app => {
         },
         sku:{
           type:[String],
-          required:true
+          default:[]
         },
         skuIdArr:{
           type:[String],
-          required:true
+          default:[]
         },
         sku_id:{
           type:String,
-          required:true
+          default:''
         }
       }
     ],
     // 总支付价
-    paymentPrice:{
-      type:Number,
-      required:true
-    }
+    paymentPrice: Number
   }, {
     versionKey: false,
   })

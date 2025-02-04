@@ -1,5 +1,7 @@
 'use strict';
 
+const { validate } = require('../../config/plugin');
+
 const Controller = require('egg').Controller;
 
 class UserorderController extends Controller {
@@ -47,6 +49,16 @@ class UserorderController extends Controller {
     // 公用提交
     await service.userorder.submitOrder(orderData)
     ctx.send()
+  }
+  // 获取我的订单列表
+  async allOrderList() {
+    const {ctx,service} = this
+    const {page} = ctx.query
+    ctx.validate({
+      page: { type: 'nullValue', tips: '缺少分页参数'}
+    }, ctx.query)
+    const res = await service.userorder.allOrderList(page, ctx.auth.uid)
+    ctx.send(res)
   }
 }
 
