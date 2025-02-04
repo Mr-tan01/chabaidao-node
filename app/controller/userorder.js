@@ -60,6 +60,21 @@ class UserorderController extends Controller {
     const res = await service.userorder.allOrderList(page, ctx.auth.uid)
     ctx.send(res)
   }
+  // 获取订单详情数据
+  async orderDatails() {
+    const {ctx,service} = this
+    const {id} = ctx.query
+    ctx.validate({
+      id: { type: 'nullValue', tips: '缺少订单ID'}
+    }, ctx.query)
+    const db = ctx.model.Userorder
+    const res = await db.find({_id:id, userOpenid:ctx.auth.uid},{
+      userOpenid:false,
+      timestamp:false,
+      userMobile:false
+    })
+    ctx.send(res)
+  }
 }
 
 module.exports = UserorderController;

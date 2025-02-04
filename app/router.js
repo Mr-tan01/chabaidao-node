@@ -75,4 +75,6 @@ module.exports = app => {
   router.post('/api/wx/outdoor-order',app.middleware.jwt(), controller.userorder.outdoorOrder);
   // 获取我的订单列表
   router.get('/api/wx/all-order-list',app.middleware.jwt(), controller.userorder.allOrderList);
+  // 获取订单详情
+  router.get('/api/wx/order-datails',app.middleware.jwt(), controller.userorder.orderDatails);
 };
