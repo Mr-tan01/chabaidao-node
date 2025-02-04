@@ -75,6 +75,29 @@ class UserorderController extends Controller {
     })
     ctx.send(res)
   }
+  // 后台管理获取用户订单列表
+  async receiveOrderList() {
+    const {ctx,service} = this
+    const {page} = ctx.query
+    ctx.validate({
+      page: { type: 'nullValue', tips: '缺少分页参数'}
+    }, ctx.query)
+    const res = await service.userorder.receiveOrderList(page)
+    ctx.send(res)
+  }
+  // 后台管理获取用户订单详情
+  async receiveOrderDetails() {
+    const {ctx} = this
+    const {id} = ctx.query
+    ctx.validate({
+      id: { type: 'nullValue', tips: '缺少订单ID'}
+    }, ctx.query)
+    const db = ctx.model.Userorder
+    const res = await db.find({_id:id},{
+      timestamp:false
+    })
+    ctx.send(res)
+  }
 }
 
 module.exports = UserorderController;

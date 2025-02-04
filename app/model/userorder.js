@@ -16,10 +16,12 @@ module.exports = app => {
     // 关联当前字段
     locaField:'userOpenid',
     // 关联目标字段
-    foreignField:'openid'
+    foreignField:'openid',
+    // 私密字段
+    select:false
     },
     // 订单时间
-    oerderTime:{
+    orderTime:{
     type:String,
     required:true,
     default:()=> moment().utcOffset(8).format('YYYY-MM-DD HH:mm:ss')

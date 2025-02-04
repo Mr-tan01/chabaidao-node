@@ -60,6 +60,33 @@ class UserorderService extends Service {
     ])
     return res
   }
+  // 后台获取订单列表
+  async receiveOrderList(page) {
+    const db = this.ctx.model.Userorder
+    // 使用聚合管道查询数据库
+    const res = await db.aggregate([
+      // 按时间戳降序排序
+      { $sort: { timestamp: -1 } },
+      // 跳过指定页数之前的记录，实现分页功能
+      { $skip: (page - 1) * 10 },
+      // 限制返回的记录数为10条
+      { $limit: 10 },
+      {
+        // 投影操作，指定返回的字段
+        $project: {
+          _id:true,
+          orderType: true,
+          orderTime:true,
+          paymentPrice: true,
+          // 计算productOrder数组的长度，用于显示一个订单的商品数量
+          productOrderCount: { $size: "$productOrder" }
+        }
+      }
+    ])
+    // 总条数
+    const total = await db.countDocuments()
+    return {order:res, total}
+  }
 }
 
 module.exports = UserorderService;

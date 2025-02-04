@@ -41,6 +41,10 @@ module.exports = app => {
   router.get('/api/admin/get-recommend', app.middleware.jwt(), controller.recommendGoods.getRecommend);
   // 删除推荐商品
   router.get('/api/admin/delete-recommend', app.middleware.jwt(), controller.recommendGoods.deleteRecommend);
+  // 获取用户订单列表
+  router.get('/api/admin/receive-order-list', app.middleware.jwt(), controller.userorder.receiveOrderList);
+  // 获取订单详情
+  router.get('/api/admin/receive-order-details', app.middleware.jwt(), controller.userorder.receiveOrderDetails);
 
   // -----------------小程序端接口------------------
   // 获取轮播图
