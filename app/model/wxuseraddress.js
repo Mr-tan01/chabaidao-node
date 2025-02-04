@@ -1,3 +1,4 @@
+// 收货地址信息
 module.exports = app => {
   const mongoose = app.mongoose
   mongoose.pluralize(null) // 去掉复数形式

@@ -1,0 +1,53 @@
+'use strict';
+
+const Controller = require('egg').Controller;
+
+class UserorderController extends Controller {
+  // 获取默认收货地址
+  async defaultAddress() {
+    const {ctx} = this
+    const db = ctx.model.Wxuseraddress
+    const res = await db.find({ userOpenid: ctx.auth.uid, defaultAddress:true },
+      {useOpenid:false, defaultAddress:false})
+    ctx.send(res)
+  }
+  // 自提订单支付
+  async selfpickupOrder() {
+    const {ctx,service} = this
+    const {orderType, userMobile, productOrder} = ctx.request.body
+    ctx.validate({
+      orderType: { type: 'nullValue', tips: '缺少订单类型' },
+      userMobile: { type: 'nullValue', tips: '手机号码不能为空' },
+      productOrder: { type: 'goodsStatsArray' }
+    },ctx.request.body)
+    const orderData = {
+      userOpenid: ctx.auth.uid,
+      orderType,
+      userMobile,
+      productOrder
+    }
+    await service.userorder.submitOrder(orderData)
+    ctx.send()
+  }
+  // 外卖订单支付
+  async outdoorOrder() {
+    const {ctx,service} = this
+    const {orderType, receiverAddress, productOrder} = ctx.request.body
+    ctx.validate({
+      orderType: { type: 'nullValue', tips: '缺少订单类型' },
+      receiverAddress: { type: 'receiverAddressVal', tips:'缺少收货地址' },
+      productOrder: { type: 'goodsStatsArray' }
+    },ctx.request.body)
+    const orderData = {
+      userOpenid: ctx.auth.uid,
+      orderType,
+      receiverAddress,
+      productOrder
+    }
+    // 公用提交
+    await service.userorder.submitOrder(orderData)
+    ctx.send()
+  }
+}
+
+module.exports = UserorderController;

@@ -25,7 +25,7 @@ class WxuserinfoController extends Controller {
     await db.findOneAndUpdate({ openid: ctx.auth.uid }, { avatar, nickname })
     ctx.send()
   }
-  // 新增收获地址
+  // 新增收货地址
   async uploadAddress() {
     const { ctx } = this
     const { name, mobile, address, detailedAddress } = ctx.request.body
@@ -39,7 +39,7 @@ class WxuserinfoController extends Controller {
     await db.create({ userOpenid: ctx.auth.uid, name, mobile, address, detailedAddress })
     ctx.send()
   }
-  // 设置默认收获地址
+  // 设置默认收货地址
   async setDefaultAddress() {
     const { ctx } = this
     const { _id } = ctx.query
@@ -53,7 +53,7 @@ class WxuserinfoController extends Controller {
     await db.findByIdAndUpdate({ _id }, { defaultAddress: true }) // findByIdAndUpdate 根据文档ID查找并更新该文档
     ctx.send()
   }
-  // 删除收获地址
+  // 删除收货地址
   async deleteUserAddress() {
     const { ctx } = this
     const { _id } = ctx.query
@@ -64,7 +64,7 @@ class WxuserinfoController extends Controller {
     await db.findByIdAndDelete({ _id }) // findByIdAndDelete 根据_id 字段查找并删除该文档
     ctx.send()
   }
-  // 获取收获地址列表
+  // 获取收货地址列表
   async getUserAddress() {
     const { ctx } = this
     const db = ctx.model.Wxuseraddress

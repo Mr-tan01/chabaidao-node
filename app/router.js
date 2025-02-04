@@ -67,4 +67,10 @@ module.exports = app => {
   router.get('/api/wx/delete-user-address',app.middleware.jwt(), controller.wxuserinfo.deleteUserAddress);
   // 获取用户地址列表
   router.get('/api/wx/get-user-address',app.middleware.jwt(), controller.wxuserinfo.getUserAddress);
+  // 获取默认地址
+  router.get('/api/wx/default-address',app.middleware.jwt(), controller.userorder.defaultAddress);
+  // 自提订单支付
+  router.post('/api/wx/selfpickup-order',app.middleware.jwt(), controller.userorder.selfpickupOrder);
+  // 外卖订单支付
+  router.post('/api/wx/outdoor-order',app.middleware.jwt(), controller.userorder.outdoorOrder);
 };
