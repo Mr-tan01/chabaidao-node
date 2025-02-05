@@ -2,7 +2,7 @@
  * @param {Egg.Application} app - egg application
  */
 module.exports = app => {
-  const { router, controller } = app;
+  const { router, controller, io } = app;
   // 商家注册
   router.post('/api/admin/register', controller.admininfo.adminRegister);
   // 商家登录
@@ -81,4 +81,10 @@ module.exports = app => {
   router.get('/api/wx/all-order-list',app.middleware.jwt(), controller.userorder.allOrderList);
   // 获取订单详情
   router.get('/api/wx/order-datails',app.middleware.jwt(), controller.userorder.orderDatails);
+
+  // -----------------即时通讯接口------------------
+  // 用户消息
+  io.route('userMessage',io.controller.chat.userMessage)
+  // 后台管理消息
+  io.route('adminMessage',io.controller.chat.adminMessage)
 };

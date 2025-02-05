@@ -31,6 +31,8 @@ class UserorderService extends Service {
       // 对商品销量自增
       await Goods.updateOne({_id:item.goods_id},{$inc:{goods_sales:item.goodsQuantity}})
     }
+    // 推送订单通知
+    this.app.io.emit('orderinform',0)
     return
   }
   // 获取我的订单列表

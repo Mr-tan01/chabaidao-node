@@ -113,6 +113,17 @@ module.exports = appInfo => {
     appid: 'wx577e561a12b841f6',
     secret:'5f20164bd75221942684ea83821958a5'
   }
+  // 即时通讯
+  config.io = {
+    init: {}, // passed to engine.io
+    namespace: {
+      '/': {
+        // 连接上的调用的中间件
+        connectionMiddleware: ['connection'],
+        packetMiddleware: [],
+      }
+    },
+  };
 
   // add your user config here
   const userConfig = {

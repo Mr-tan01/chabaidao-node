@@ -21,5 +21,10 @@ module.exports = {
   cors : {
     enable: true,
     package: 'egg-cors',
+  },
+  // Socket.IO插件
+  io: {
+    enable: true,
+    package: 'egg-socket.io',
   }
 };
